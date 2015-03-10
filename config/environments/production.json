@@ -1,0 +1,5 @@
+{
+  "urlPrefix": "/Api",
+  "templateBase": "/static/admin/",
+  "imagePath": "/static/admin/images/"
+}
