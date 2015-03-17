@@ -26,6 +26,9 @@
         <li ui-sref-active="active">
           <a ui-sref="shuwo.user"><em class="fa fa-users"></em> <span class="item-text">用户管理</span></a>
         </li>
+        <li  ng-class="{active: $state.includes('shuwo.bd')}">
+          <a ui-sref="shuwo.bd.list"><em class="fa fa-list"></em> <span class="item-text">BD管理</span></a>
+        </li>
       </ul>
     </nav>
   </aside>

@@ -2,7 +2,7 @@
 
 angular.module('services.config', [])
   .constant('configuration', {
-    urlPrefix: '/Api',
-    templateBase: '/static/admin/',
-    imagePath: '/static/admin/images/'
+    urlPrefix: '/shuwo/project/index.php/Api',
+    templateBase: '',
+    imagePath: 'images/'
   });

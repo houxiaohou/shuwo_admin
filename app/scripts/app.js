@@ -146,6 +146,17 @@ angular
           templateUrl: templateBase + 'views/order.detail.html',
           controller: 'OrderDetailCtrl'
         })
+        .state('shuwo.bd', {
+          abstract: true,
+          url: '/bd',
+          template: '<ui-view />'
+        })
+        .state('shuwo.bd.list', {
+          url: '',
+          templateUrl: templateBase + 'views/bd.list.html',
+          controller: 'CategoryCtrl'
+        })
+
     }])
   .run(['$rootScope', '$state', '$stateParams', '$http', '$cookies',
     function ($rootScope, $state, $stateParams, $http, $cookies) {

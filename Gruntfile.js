@@ -116,9 +116,9 @@ module.exports = function (grunt) {
       },
       proxies: [
         {
-          context: '/shuwo/project/Api',
+          context: '/shuwo/project/index.php/Api',
           host: 'localhost',
-          port: 8888,
+          port: 8080,
           changeOrigin: true
         }
       ],
