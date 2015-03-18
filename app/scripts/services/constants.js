@@ -20,7 +20,10 @@ angular.module('shuwoAdminApp')
         product: URL_PREFIX + '/product',
         login: URL_PREFIX + '/login',
         allOrders: URL_PREFIX + '/allorder',
-        order: URL_PREFIX + '/order'
+        order: URL_PREFIX + '/order',
+        bdAll: URL_PREFIX+'/allbds',
+        bd: URL_PREFIX+'/bd',
+        bdid: URL_PREFIX+'/bdid'
       }
     }
   }]);

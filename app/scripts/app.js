@@ -154,7 +154,17 @@ angular
         .state('shuwo.bd.list', {
           url: '',
           templateUrl: templateBase + 'views/bd.list.html',
-          controller: 'CategoryCtrl'
+          controller: 'BDCtrl'
+        })
+        .state('shuwo.bd.shop', {
+          abstract: true,
+          url: '/{id:[0-9]{1,10}}',
+          template: '<ui-view />'
+        })
+        .state('shuwo.bd.shop.list', {
+          url: '',
+          templateUrl: templateBase + 'views/bd.shop.list.html',
+          controller: 'BDShopCtrl'
         })
 
     }])
