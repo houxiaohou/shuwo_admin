@@ -154,7 +154,7 @@ angular
         .state('shuwo.bd.list', {
           url: '',
           templateUrl: templateBase + 'views/bd.list.html',
-          controller: 'CategoryCtrl'
+          controller: 'BDCtrl'
         })
 
     }])
