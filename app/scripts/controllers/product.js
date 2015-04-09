@@ -8,12 +8,17 @@
  * Controller of the shuwoAdminApp
  */
 angular.module('shuwoAdminApp')
-  .controller('ShopProductCtrl', ['$scope', '$state', '$stateParams', 'shop', 'product',
-    function ($scope, $state, $stateParams, shop, product) {
+  .controller('ShopProductCtrl', ['$scope', '$state', '$stateParams', 'shop', 'product','category',
+    function ($scope, $state, $stateParams, shop, product,category) {
       var shopId = $stateParams.id;
       $scope.shop = undefined;
       $scope.loading = true;
       $scope.products = [];
+      $scope.options = [
+        {label: '按数量销售，按重量计价', value: 1},
+        {label: '按重量销售，按重量计价', value: 2},
+        {label: '按数量销售，按数量计价', value: 3}
+      ];
 
       shop.getShopById(shopId).success(function (data) {
         if (typeof data === 'object') {
@@ -27,6 +32,7 @@ angular.module('shuwoAdminApp')
           for (var i in data) {
             var p = data[i];
             p.issale = p.issale === '1';
+            p.attribute =  $scope.options[p.attribute-1]['label'];
             $scope.products.push(p)
           }
         }

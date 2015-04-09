@@ -43,8 +43,12 @@
             <th>id</th>
             <th>产品图片</th>
             <th>产品名称</th>
-            <th>原价</th>
-            <th>售价</th>
+            <th>产品分类</th>
+            <th>原价（每500g或每个)</th>
+            <th>销售价格（每500g或每个）</th>
+            <th>计价方式</th>
+            <th>单个产品均重(g)</th>
+            <th>销售单位</th>
             <th>是否在售</th>
             <th>操作</th>
           </tr>
@@ -56,8 +60,12 @@
               <img ng-src="{{p.pimgurl}}" alt="" width="60" ng-show="p.pimgurl.length>0"/>
             </td>
             <td>{{p.productname}}</td>
+            <td>{{p.categoryid}}</td>
             <td>{{p.price}}</td>
             <td>{{p.discount}}</td>
+            <td>{{p.attribute}}</td>
+            <td>{{p.unitweight}}</td>
+            <td>{{p.unit}}</td>
             <td>
               <label class="switch">
                 <input type="checkbox" ng-model="p.issale" ng-change="changeSaleStatus(p);">
