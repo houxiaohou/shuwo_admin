@@ -26,6 +26,13 @@ angular.module('shuwoAdminApp')
         }
       });
 
+      $scope.categories = [];
+      category.listCategory().success(function (data) {
+        for (var i in data) {
+          $scope.categories.push({label: data[i].categoryname, value: data[i].categoryid});
+        }
+      });
+
       // 列出店铺产品
       product.listProductsByShopId(shopId).success(function (data) {
         if (typeof data === 'object') {
@@ -33,7 +40,14 @@ angular.module('shuwoAdminApp')
             var p = data[i];
             p.issale = p.issale === '1';
             p.attribute =  $scope.options[p.attribute-1]['label'];
-            $scope.products.push(p)
+            for(var j in  $scope.categories)
+            {
+              if( $scope.categories[j]['value'] == p.categoryid)
+              {
+                p.categoryname= $scope.categories[j]['label'];
+              }
+            }
+            $scope.products.push(p);
           }
         }
         $scope.loading = false;
@@ -74,6 +88,7 @@ angular.module('shuwoAdminApp')
           $scope.categories.push({label: data[i].categoryname, value: data[i].categoryid});
           $scope.product.category = $scope.categories[0];
         }
+
       });
 
       // 图片上传完成后的回调方法
