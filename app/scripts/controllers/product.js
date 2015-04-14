@@ -11,14 +11,17 @@ angular.module('shuwoAdminApp')
   .controller('ShopProductCtrl', ['$scope', '$state', '$stateParams', 'shop', 'product','category',
     function ($scope, $state, $stateParams, shop, product,category) {
       var shopId = $stateParams.id;
+      $scope.product = {issale: true, shopid: shopId};
       $scope.shop = undefined;
       $scope.loading = true;
       $scope.products = [];
+
       $scope.options = [
         {label: '按数量销售，按重量计价', value: 1},
         {label: '按重量销售，按重量计价', value: 2},
         {label: '按数量销售，按数量计价', value: 3}
       ];
+      $scope.product.attribute = $scope.options[0]
 
       shop.getShopById(shopId).success(function (data) {
         if (typeof data === 'object') {
@@ -30,8 +33,20 @@ angular.module('shuwoAdminApp')
       category.listCategory().success(function (data) {
         for (var i in data) {
           $scope.categories.push({label: data[i].categoryname, value: data[i].categoryid});
+          $scope.product.category = $scope.categories[0];
         }
       });
+
+      $scope.saveProduct = function () {
+        product.saveProduct($scope.product);
+        $state.reload();
+      };
+
+      // 图片上传完成后的回调方法
+      $scope.imageUploaded = function (link) {
+        $scope.product.pimgurl = link;
+        $scope.$apply();
+      };
 
       // 列出店铺产品
       product.listProductsByShopId(shopId).success(function (data) {
@@ -47,6 +62,7 @@ angular.module('shuwoAdminApp')
                 p.categoryname= $scope.categories[j]['label'];
               }
             }
+            p.isEdit = 0;
             $scope.products.push(p);
           }
         }
@@ -56,6 +72,11 @@ angular.module('shuwoAdminApp')
       // 选中遥操作的产品
       $scope.selectProduct = function (product) {
         $scope.productSelected = product;
+      };
+
+      $scope.productEdit= function(p)
+      {
+        p.isEdit = 1;
       };
 
       // 删除产品
