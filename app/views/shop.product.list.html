@@ -55,13 +55,35 @@
           </tr>
           </thead>
           <tbody>
+          <form role="form" name="addStoreForm">
+            <tr>
+              <td>
+                <div ng-controller="UploadCtrl" id="container" >
+                  <a class="btn btn-default "  id="upload-btn"><i class="fa fa-upload"></i></a>
+                </div></td>
+              <td><img ng-src="{{product.pimgurl}}" alt="" width="60" ng-show="product.pimgurl"/></td>
+              <td><input type="text" placeholder="输入产品名称" class="form-control" ng-model="product.productname" required></td>
+              <td><select class="form-control" ng-model="product.category" ng-options="category as category.label for category in categories"></select></td>
+              <td><input type="number" step="any" placeholder="原价(500g或个)" class="form-control" ng-model="product.price" required></td>
+              <td><input type="number" step="any" placeholder="销售价(500g或个)" class="form-control" ng-model="product.discount" required></td>
+              <td><select class="form-control" ng-model="product.attribute" ng-options="opt as opt.label for opt in options"></select></td>
+              <td><input type="number"  step="any" placeholder="单个产重或个(个)" class="form-control" ng-model="product.unitweight" ng-show="product.attribute.value==1"></td>
+              <td><input type="text" placeholder="销售单位" class="form-control" ng-model="product.unit"></td>
+              <td>
+                <label class="switch">
+                  <input type="checkbox" ng-model="product.issale">
+                  <span></span>
+                </label>
+              </td>
+              <td><button type="submit" class="btn btn-success btn-sm"   ng-click="saveProduct();" ng-disabled="!addStoreForm.$valid">添加商品</button></td>
+            </tr>
+          </form>
           <tr role="row" ng-repeat="p in products">
             <td>{{p.productid}}</td>
             <td>
               <img ng-src="{{p.pimgurl}}" alt="" width="60" ng-show="p.pimgurl.length>0"/>
             </td>
-            <td><span ng-show="p.isEdit ==0">{{p.productname}}</span>
-              <input type="text" placeholder="输入产品名称" class="form-control" ng-model="p.productname" ng-show="p.isEdit ==1" required></td>
+            <td>{{p.productname}}</td>
             <td>{{p.categoryname}}</td>
             <td>{{p.price}}</td>
             <td>{{p.discount}}</td>
@@ -76,32 +98,9 @@
             </td>
             <td class="op">
               <i class="fa fa-trash" ng-click="selectProduct(p);" bs-popover data-template="confirmRemove.html" data-placement="top" data-animation="am-flip-x"></i>
-              <a  ng-click="productEdit(p)" bs-tooltip data-title="编辑产品"><i class="fa fa-edit"></i></a>
+              <a ui-sref="shuwo.shop.product.edit({productId:p.productid})" bs-tooltip data-title="编辑产品"><i class="fa fa-edit"></i></a>
             </td>
           </tr>
-          <form role="form" name="addStoreForm">
-          <tr>
-            <td>
-              <div ng-controller="UploadCtrl" id="container" >
-                <a class="btn btn-default "  id="upload-btn"><i class="fa fa-upload"></i></a>
-              </div></td>
-            <td><img ng-src="{{product.pimgurl}}" alt="" width="60" ng-show="product.pimgurl"/></td>
-            <td><input type="text" placeholder="输入产品名称" class="form-control" ng-model="product.productname" required></td>
-            <td><select class="form-control" ng-model="product.category" ng-options="category as category.label for category in categories"></select></td>
-            <td><input type="number" step="any" placeholder="原价(500g或个)" class="form-control" ng-model="product.price" required></td>
-            <td><input type="number" step="any" placeholder="销售价(500g或个)" class="form-control" ng-model="product.discount" required></td>
-            <td><select class="form-control" ng-model="product.attribute" ng-options="opt as opt.label for opt in options"></select></td>
-            <td><input type="number"  step="any" placeholder="单个产重或个(个)" class="form-control" ng-model="product.unitweight" ng-show="product.attribute.value==1"></td>
-            <td><input type="text" placeholder="销售单位" class="form-control" ng-model="product.unit"></td>
-            <td>
-              <label class="switch">
-                <input type="checkbox" ng-model="product.issale">
-                <span></span>
-              </label>
-            </td>
-            <td><button type="submit" class="btn btn-success btn-sm"   ng-click="saveProduct();" ng-disabled="!addStoreForm.$valid">添加商品</button></td>
-          </tr>
-          </form>
           </tbody>
         </table>
       </div>

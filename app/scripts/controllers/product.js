@@ -55,13 +55,6 @@ angular.module('shuwoAdminApp')
             var p = data[i];
             p.issale = p.issale === '1';
             p.attribute =  $scope.options[p.attribute-1]['label'];
-            for(var j in  $scope.categories)
-            {
-              if( $scope.categories[j]['value'] == p.categoryid)
-              {
-                p.categoryname= $scope.categories[j]['label'];
-              }
-            }
             p.isEdit = 0;
             $scope.products.push(p);
           }
