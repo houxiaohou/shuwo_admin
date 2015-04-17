@@ -22,9 +22,35 @@ angular.module('shuwoAdminApp')
         } else {
           data.isopen = 0;
         }
+        if(data.isdiscount)
+        {
+          data.isdiscount = 1;
+        }
+        else
+        {
+          data.isdiscount = 0;
+          data.discount = 0;
+        }
+
         return $http.post(constants.api.shop + '/' + data.shopid, data);
       },
       newShop: function (data) {
+        if(data.isopen)
+        {
+          data.isopen = 1;
+        }
+        else
+        {
+          data.isopen = 0
+        }
+        if(data.isdiscount)
+        {
+          data.isdiscount = 1;
+        }
+        else
+        {
+          data.isdiscount = 0;
+        }
         return $http.post(constants.api.shop, data);
       },
       deleteShop: function (id) {

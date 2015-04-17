@@ -23,7 +23,8 @@ angular.module('shuwoAdminApp')
         order: URL_PREFIX + '/order',
         bdAll: URL_PREFIX+'/allbds',
         bd: URL_PREFIX+'/bd',
-        bdid: URL_PREFIX+'/bdid'
+        bdid: URL_PREFIX+'/bdid',
+        searchorder:URL_PREFIX+'/searchorder'
       }
     }
   }]);

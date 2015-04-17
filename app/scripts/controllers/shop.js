@@ -18,7 +18,16 @@ angular.module('shuwoAdminApp')
           for (var i in data) {
             var shop = data[i];
             shop.isopen = shop.isopen === '1';
+            if(shop.isdiscount==1)
+            {
+              shop.isdiscount = '是';
+            }
+            else
+            {
+              shop.isdiscount = '否';
+            }
             $scope.shopes.push(shop);
+
           }
         }
         $scope.loading = false;
@@ -87,7 +96,8 @@ angular.module('shuwoAdminApp')
         $scope.shop = data;
         $scope.shop.dlprice = Number($scope.shop.dlprice);
         $scope.shop.isopen = $scope.shop.isopen === '1';
-
+        $scope.shop.isdiscount = $scope.shop.isdiscount ==='1';
+        $scope.shop.discount = Number($scope.shop.discount);
         initialMap();
       });
 

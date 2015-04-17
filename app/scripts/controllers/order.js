@@ -27,6 +27,19 @@ angular.module('shuwoAdminApp')
       });
     }
 
+    $scope.orderSearch =function()
+    {
+      if($scope.order.search !=undefined) {
+        order.searchtOrder($scope.order.search).success(function(data){
+           if(data.length >0)
+           {
+             $scope.orders = data;
+           }
+        });
+      }
+    }
+
+
     loadPage();
 
     $scope.$watch('page', function (newVal, oldVal) {
