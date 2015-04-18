@@ -16,7 +16,7 @@ angular.module('shuwoAdminApp')
       getOrderById: function(id) {
         return $http.get(constants.api.order + '/' + id);
       },
-      searchtOrder: function(data) {
+      searchOrder: function(data) {
 
         return $http.post(constants.api.searchorder,{search:data});
       }
