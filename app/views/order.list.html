@@ -44,8 +44,9 @@
             <td>￥{{o.price}}</td>
             <td>
               <div class="label label-danger" ng-if="o.orderstatus=='0'">待确认</div>
-              <div class="label label-success" ng-if="o.orderstatus=='1'">已完成</div>
+              <div class="label label-warning" ng-if="o.orderstatus=='1'">已确认</div>
               <div class="label label-default" ng-if="o.orderstatus=='2'">{{o.ordernotes}}</div>
+              <div class="label label-success" ng-if="o.orderstatus=='3'">已收货</div>
             </td>
             <td>
               <a ui-sref="shuwo.order.detail({id:o.orderid})" tooltip="查看详情"><i class="fa fa-eye"></i></a>
