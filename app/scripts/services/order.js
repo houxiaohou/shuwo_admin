@@ -17,8 +17,10 @@ angular.module('shuwoAdminApp')
         return $http.get(constants.api.order + '/' + id);
       },
       searchOrder: function(data) {
-
         return $http.post(constants.api.searchorder,{search:data});
+      },
+      updateOrderDelivery: function(data) {
+        return $http.post(constants.api.delivery, data);
       }
     }
   }]);

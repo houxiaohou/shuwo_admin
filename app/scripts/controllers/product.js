@@ -21,7 +21,7 @@ angular.module('shuwoAdminApp')
         {label: '按重量销售，按重量计价', value: 2},
         {label: '按数量销售，按数量计价', value: 3}
       ];
-      $scope.product.attribute = $scope.options[0]
+      $scope.product.attribute = $scope.options[0];
 
       shop.getShopById(shopId).success(function (data) {
         if (typeof data === 'object') {

@@ -21,10 +21,11 @@ angular.module('shuwoAdminApp')
         login: URL_PREFIX + '/login',
         allOrders: URL_PREFIX + '/allorder',
         order: URL_PREFIX + '/order',
-        bdAll: URL_PREFIX+'/allbds',
-        bd: URL_PREFIX+'/bd',
-        bdid: URL_PREFIX+'/bdid',
-        searchorder:URL_PREFIX+'/searchorderbyadmin'
+        bdAll: URL_PREFIX + '/allbds',
+        bd: URL_PREFIX + '/bd',
+        bdid: URL_PREFIX + '/bdid',
+        searchorder: URL_PREFIX + '/searchorderbyadmin',
+        delivery: URL_PREFIX + '/deliveryorder'
       }
     }
   }]);
