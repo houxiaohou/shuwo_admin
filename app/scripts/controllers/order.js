@@ -16,7 +16,9 @@ angular.module('shuwoAdminApp')
       {label: '待确认订单', value: 0},
       {label: '已确认订单', value: 1},
       {label: '无效订单', value: 2},
-      {label: '已收货订单', value: 3}
+      {label: '已收货订单', value: 3},
+      {label: '上门自提', value: -3},
+      {label: '送货上门', value: -4}
     ];
 
     $scope.filter = $scope.options[0];

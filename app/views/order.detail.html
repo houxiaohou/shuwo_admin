@@ -36,8 +36,9 @@
             <td>￥{{order.price}}</td>
             <td>
               <div class="label label-danger" ng-if="order.orderstatus=='0'">待确认</div>
-              <div class="label label-success" ng-if="order.orderstatus=='1'">已完成</div>
+              <div class="label label-warning" ng-if="order.orderstatus=='1'">已确认</div>
               <div class="label label-default" ng-if="order.orderstatus=='2'">{{order.ordernotes}}</div>
+              <div class="label label-success" ng-if="order.orderstatus=='3'">已收货</div>
             </td>
           </tr>
           </tbody>
