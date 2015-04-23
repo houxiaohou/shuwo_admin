@@ -8,7 +8,7 @@
  * Controller of the shuwoAdminApp
  */
 angular.module('shuwoAdminApp')
-  .controller('OrderListCtrl', ['$scope', 'order', function ($scope, order) {
+  .controller('OrderListCtrl', ['$scope', 'order', 'shop', function ($scope, order, shop) {
 
     $scope.options = [
       {label: '全部订单', value: -1},
@@ -17,7 +17,7 @@ angular.module('shuwoAdminApp')
       {label: '已确认订单', value: 1},
       {label: '无效订单', value: 2},
       {label: '已收货订单', value: 3},
-      {label: '上门自提', value: -3},
+      {label: '门店自提', value: -3},
       {label: '送货上门', value: -4}
     ];
 
@@ -25,13 +25,32 @@ angular.module('shuwoAdminApp')
 
     $scope.loading = true;
     $scope.status = -1;
+    $scope.shopId = -1;
     $scope.page = 1;
     $scope.perPage = 10;
     $scope.totalItems = 1;
 
+    $scope.allShops = {};
+
+
+    shop.listShops().success(function (data) {
+      $scope.shops = [{label: '全部店铺', value: '-1'}];
+      for (var i in data) {
+        var s = data[i];
+        $scope.shops.push({label: s.spn, value: s.shopid});
+        $scope.allShops[s.shopid] = s.spn;
+      }
+      $scope.shopFilter = $scope.shops[0];
+    });
+
     function loadPage() {
       $scope.loading = true;
-      order.listAllOrders(($scope.page - 1) * $scope.perPage, $scope.perPage, $scope.status).success(function (data) {
+      order.listAllOrders({
+        start: ($scope.page - 1) * $scope.perPage,
+        count: $scope.perPage,
+        status: $scope.status,
+        shopId: $scope.shopId
+      }).success(function (data) {
         $scope.orders = data;
         if (data.length === 10) {
           $scope.totalItems += 10;
@@ -57,16 +76,16 @@ angular.module('shuwoAdminApp')
       }
     });
 
-    $scope.$watch('filter', function (newVal, oldVal) {
+    $scope.$watchCollection('[filter, shopFilter]', function (newValues, oldValues) {
       // 搜索订单
-      if (newVal === undefined) {
+      if (newValues[0] === undefined || newValues[1] === undefined) {
         return;
       }
-      $scope.status = newVal.value;
+      $scope.status = newValues[0].value;
+      $scope.shopId = newValues[1].value;
       $scope.page = 1;
       loadPage();
     });
-
 
     $scope.$watch('page', function (newVal, oldVal) {
       if (newVal != oldVal) {

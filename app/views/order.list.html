@@ -9,10 +9,11 @@
       </div>
     </div>
   </div>
-  <div class="col-lg-4">
-    <select name="status" class="form-control" ng-model="filter" ng-options="opt as opt.label for opt in options">
-
-    </select>
+  <div class="col-lg-3">
+    <select name="status" class="form-control" ng-model="filter" ng-options="opt as opt.label for opt in options"></select>
+  </div>
+  <div class="col-lg-3">
+    <select name="shop" class="form-control" ng-model="shopFilter" ng-options="opt as opt.label for opt in shops"></select>
   </div>
 </div>
 <div class="row" style="margin-top: 20px;">
@@ -25,7 +26,7 @@
           <tr role="row">
             <th>订单时间</th>
             <th>订单编号</th>
-            <th>店铺id</th>
+            <th>店铺名称</th>
             <th>收货人</th>
             <th>电话</th>
             <th>地址</th>
@@ -44,12 +45,12 @@
               ng-class="{'success': o.isdelivery=='1'}">
             <td>{{o.createdtime}}（{{o.createdtime | humanTime}}）</td>
             <td>{{o.orderid}}</td>
-            <td>{{o.shopid}}</td>
+            <td>{{allShops[o.shopid]}}</td>
             <td>{{o.username}}</td>
             <td>{{o.phone}}</td>
             <td>{{o.address}}</td>
             <td>
-              <span class="label label-warning" ng-show="o.ispickup=='0'">上门</span>
+              <span class="label label-warning" ng-show="o.ispickup=='0'">外送</span>
               <span class="label label-info" ng-show="o.ispickup=='1'">自提</span>
             </td>
             <td>{{o.dltime}}</td>
