@@ -25,7 +25,9 @@ angular.module('shuwoAdminApp')
         bd: URL_PREFIX + '/bd',
         bdid: URL_PREFIX + '/bdid',
         searchorder: URL_PREFIX + '/searchorderbyadmin',
-        delivery: URL_PREFIX + '/deliveryorder'
+        delivery: URL_PREFIX + '/deliveryorder',
+        allUsers: URL_PREFIX + '/analytics/users',
+        userOrder: URL_PREFIX + '/analytics/user/orders'
       }
     }
   }]);
