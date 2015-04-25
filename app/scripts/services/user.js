@@ -15,6 +15,12 @@ angular.module('shuwoAdminApp')
       },
       userOrders: function (userid) {
         return $http.get(constants.api.userOrder, {params: {userid: userid}});
+      },
+      blockUser: function(userid, block) {
+        return $http.post(constants.api.userBlock, {userid: userid, block: block});
+      },
+      listBlockedUsers: function(params) {
+        return $http.get(constants.api.blockedUsers, {params: params});
       }
     }
   }]);

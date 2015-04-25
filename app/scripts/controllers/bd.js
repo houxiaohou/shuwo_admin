@@ -20,7 +20,7 @@ angular.module('shuwoAdminApp')
 //
 //      // 选中分类
       $scope.selectBD = function (id) {
-        $scope.selectedBD= id;
+        $scope.selectedBD = id;
       };
 
       // 确认删除分类
@@ -35,33 +35,40 @@ angular.module('shuwoAdminApp')
           alert('删除失败');
         });
       };
-//      // 新建分类的选项
-//      $scope.category = {categoryname: ''};
-//      $scope.saveCategory = function () {
-//        category.addCategory($scope.category).success(function () {
-//          $state.go('shuwo.category.list');
-//        }).error(function () {
-//          alert('添加出错');
-//        });
-//      };
-//
- }]);
-//angular.module('shuwoAdminApp')
-//  .controller('CategoryEditCtrl', ['$scope', '$state', '$stateParams', 'category',
-//    function ($scope, $state, $stateParams, category) {
-//      $scope.category = {};
-//      var categoryid = $stateParams.categoryid;
-//      category.getCategoryById(categoryid).success(function (data) {
-//        $scope.category = data;
-//      }).error(function () {
-//        alert('获取数据出错');
-//      });
-//      $scope.saveCategory = function () {
-//        category.updateCategory($scope.category).success(function () {
-//          $state.go('shuwo.category.list');
-//        }).error(function () {
-//          alert('保存出错！');
-//        });
-//      };
-//
-//    }]);
+
+    }]);
+
+angular.module('shuwoAdminApp')
+  .controller('BDShopCtrl', ['$scope', '$state', '$stateParams', 'bd', 'shop',
+    function ($scope, $state, $stateParams, bd, shop) {
+      $scope.bdId = $stateParams.id;
+
+      $scope.shopOptions = [];
+
+      bd.listBDShops($scope.bdId).success(function (data) {
+        $scope.shops = data.shops;
+        $scope.bd = data.bd;
+      });
+
+      shop.listShops().success(function (data) {
+        for (var i in data) {
+          var s = data[i];
+          $scope.shopOptions.push({label: s.spn, value: s.shopid});
+        }
+        $scope.selectedShop = $scope.shopOptions[0];
+      });
+
+      $scope.addShop = function () {
+        // 添加店铺
+        bd.addBDShop($scope.bdId, $scope.selectedShop.value).success(function () {
+          $state.go($state.current, {}, {reload: true});
+        });
+      };
+      $scope.deleteShop = function (shopid) {
+        // 删除店铺
+        bd.deleteBDShop($scope.bdId, shopid).success(function () {
+          $state.go($state.current, {}, {reload: true});
+        });
+      };
+
+    }]);
