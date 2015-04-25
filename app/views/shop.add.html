@@ -8,7 +8,7 @@
         <form role="form" name="addStoreForm">
           <div class="form-group">
             <label>店铺名称</label>
-            <input type="text" placeholder="输入店铺名称" class="form-control" ng-model="shop.spn" required>
+            <input type="text" placeholder="输入店铺名称" class="form-control" ng-model="shop.spn" required maxlength="13">
           </div>
           <div class="form-group">
             <label>省份</label>
@@ -36,6 +36,17 @@
               <input type="checkbox" ng-model="shop.isopen">
               <span></span>
             </label>
+          </div>
+          <div class="form-group">
+            <label>是否优惠</label><br />
+            <label class="switch">
+              <input type="checkbox" ng-model="shop.isdiscount">
+              <span></span>
+            </label>
+          </div>
+          <div class="form-group"  ng-show="shop.isdiscount">
+            <label>优惠价格</label>
+            <input type="number" placeholder="输入优惠价格，数字" class="form-control" ng-model="shop.discount">
           </div>
           <div class="form-group">
             <label>店铺公告</label>

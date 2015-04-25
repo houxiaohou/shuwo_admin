@@ -8,12 +8,20 @@
  * Controller of the shuwoAdminApp
  */
 angular.module('shuwoAdminApp')
-  .controller('ShopProductCtrl', ['$scope', '$state', '$stateParams', 'shop', 'product',
-    function ($scope, $state, $stateParams, shop, product) {
+  .controller('ShopProductCtrl', ['$scope', '$state', '$stateParams', 'shop', 'product','category',
+    function ($scope, $state, $stateParams, shop, product,category) {
       var shopId = $stateParams.id;
+      $scope.product = {issale: true, shopid: shopId};
       $scope.shop = undefined;
       $scope.loading = true;
       $scope.products = [];
+
+      $scope.options = [
+        {label: '按数量销售，按重量计价', value: 1},
+        {label: '按重量销售，按重量计价', value: 2},
+        {label: '按数量销售，按数量计价', value: 3}
+      ];
+      $scope.product.attribute = $scope.options[0];
 
       shop.getShopById(shopId).success(function (data) {
         if (typeof data === 'object') {
@@ -21,13 +29,34 @@ angular.module('shuwoAdminApp')
         }
       });
 
+      $scope.categories = [];
+      category.listCategory().success(function (data) {
+        for (var i in data) {
+          $scope.categories.push({label: data[i].categoryname, value: data[i].categoryid});
+          $scope.product.category = $scope.categories[0];
+        }
+      });
+
+      $scope.saveProduct = function () {
+        product.saveProduct($scope.product);
+        $state.reload();
+      };
+
+      // 图片上传完成后的回调方法
+      $scope.imageUploaded = function (link) {
+        $scope.product.pimgurl = link;
+        $scope.$apply();
+      };
+
       // 列出店铺产品
       product.listProductsByShopId(shopId).success(function (data) {
         if (typeof data === 'object') {
           for (var i in data) {
             var p = data[i];
             p.issale = p.issale === '1';
-            $scope.products.push(p)
+            p.attribute =  $scope.options[p.attribute-1]['label'];
+            p.isEdit = 0;
+            $scope.products.push(p);
           }
         }
         $scope.loading = false;
@@ -36,6 +65,11 @@ angular.module('shuwoAdminApp')
       // 选中遥操作的产品
       $scope.selectProduct = function (product) {
         $scope.productSelected = product;
+      };
+
+      $scope.productEdit= function(p)
+      {
+        p.isEdit = 1;
       };
 
       // 删除产品
@@ -115,8 +149,6 @@ angular.module('shuwoAdminApp')
         {label: '按数量销售，按数量计价', value: 3}
       ];
 
-
-
       product.getProductById($stateParams.productId).success(function (data) {
         $scope.product = data;
         $scope.product.attribute = $scope.options[$scope.product.attribute - 1];
@@ -167,5 +199,3 @@ angular.module('shuwoAdminApp')
         $scope.product.productname = img.des;
       };
     }]);
-
-

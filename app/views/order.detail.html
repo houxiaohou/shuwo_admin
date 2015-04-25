@@ -13,7 +13,8 @@
             <th>收件人</th>
             <th>电话</th>
             <th>地址</th>
-            <th>配送时间</th>
+            <th>方式</th>
+            <th>时间</th>
             <th>备注</th>
             <th>总价</th>
             <th>订单状态</th>
@@ -26,17 +27,40 @@
             <td>{{order.username}}</td>
             <td>{{order.phone}}</td>
             <td>{{order.address}}</td>
+            <td>
+              <span class="label label-warning" ng-show="order.ispickup=='0'">上门</span>
+              <span class="label label-info" ng-show="order.ispickup=='1'">自提</span>
+            </td>
             <td>{{order.dltime}}</td>
             <td>{{order.notes}}</td>
             <td>￥{{order.price}}</td>
             <td>
               <div class="label label-danger" ng-if="order.orderstatus=='0'">待确认</div>
-              <div class="label label-success" ng-if="order.orderstatus=='1'">已完成</div>
+              <div class="label label-warning" ng-if="order.orderstatus=='1'">已确认</div>
               <div class="label label-default" ng-if="order.orderstatus=='2'">{{order.ordernotes}}</div>
+              <div class="label label-success" ng-if="order.orderstatus=='3'">已收货</div>
             </td>
           </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12" ng-show="order.isdelivery=='1'">
+    <div class="panel panel-default">
+      <div class="panel-heading">确认订单配送方式</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-2">
+            <input type="checkbox" ng-model="confirm.ispickup"/>  门店自提
+          </div>
+          <div class="col-lg-4" ng-show="!confirm.ispickup">
+            送货到 <input type="text" class="input-sm" ng-model="confirm.address"/>
+          </div>
+          <div class="col-lg-2">
+            <button class="btn btn-success btn-sm" ng-click="saveOrderDelivery()">保存</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

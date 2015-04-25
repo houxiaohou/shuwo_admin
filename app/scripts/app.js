@@ -166,6 +166,21 @@ angular
           templateUrl: templateBase + 'views/bd.shop.list.html',
           controller: 'BDShopCtrl'
         })
+        .state('shuwo.user', {
+          abstract: true,
+          url: '/users',
+          template: '<ui-view />'
+        })
+        .state('shuwo.user.list', {
+          url: '',
+          templateUrl: templateBase + 'views/user.list.html',
+          controller: 'UsersCtrl'
+        })
+        .state('shuwo.user.orders', {
+          url: '/orders/{id:[0-9]{1,20}}',
+          templateUrl: templateBase + 'views/user.orders.html',
+          controller: 'UserOrdersCtrl'
+        })
 
     }])
   .run(['$rootScope', '$state', '$stateParams', '$http', '$cookies',
