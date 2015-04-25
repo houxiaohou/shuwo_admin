@@ -63,12 +63,27 @@ angular.module('shuwoAdminApp')
       ];
       $scope.product.attribute = $scope.options[0];
       $scope.categories = [];
+      $scope.categoryid = 0;
       category.listCategory().success(function (data) {
         for (var i in data) {
           $scope.categories.push({label: data[i].categoryname, value: data[i].categoryid});
           $scope.product.category = $scope.categories[0];
         }
+        $scope.categoryid = $scope.product.category.value;
+
+        category.getCategoryById($scope.categoryid).success(function (data) {
+          $scope.category = data['category'];
+          $scope.categoryImg = data['categorypic'];
+        });
       });
+
+      $scope.selectChange = function() {
+        $scope.categoryid = $scope.product.category.value;
+        category.getCategoryById($scope.categoryid).success(function (data) {
+          $scope.category = data['category'];
+          $scope.categoryImg = data['categorypic'];
+        });
+      }
 
       // 图片上传完成后的回调方法
       $scope.imageUploaded = function (link) {
@@ -80,6 +95,11 @@ angular.module('shuwoAdminApp')
       $scope.saveProduct = function () {
         product.saveProduct($scope.product);
         $state.go('shuwo.shop.product.list');
+      };
+
+      $scope.imgClick = function(img){
+        $scope.product.pimgurl = img.imgurl;
+        $scope.product.productname = img.des;
       };
 
     }]);
@@ -94,6 +114,8 @@ angular.module('shuwoAdminApp')
         {label: '按重量销售，按重量计价', value: 2},
         {label: '按数量销售，按数量计价', value: 3}
       ];
+
+
 
       product.getProductById($stateParams.productId).success(function (data) {
         $scope.product = data;
@@ -111,6 +133,12 @@ angular.module('shuwoAdminApp')
               $scope.product.category = c;
             }
           }
+
+          $scope.categoryid = $scope.product.category.value;
+          category.getCategoryById($scope.categoryid).success(function (data) {
+            $scope.category = data['category'];
+            $scope.categoryImg = data['categorypic'];
+          });
         });
       }
 
@@ -125,4 +153,19 @@ angular.module('shuwoAdminApp')
         product.updateProduct($scope.product);
         $state.go('shuwo.shop.product.list');
       }
+
+      $scope.selectChange = function() {
+        $scope.categoryid = $scope.product.category.value;
+        category.getCategoryById($scope.categoryid).success(function (data) {
+          $scope.category = data['category'];
+          $scope.categoryImg = data['categorypic'];
+        });
+      }
+
+      $scope.imgClick = function(img){
+        $scope.product.pimgurl = img.imgurl;
+        $scope.product.productname = img.des;
+      };
     }]);
+
+

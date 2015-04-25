@@ -118,7 +118,7 @@ module.exports = function (grunt) {
         {
           context: '/shuwo/project/index.php/Api',
           host: 'localhost',
-          port: 8080,
+          port:80,
           changeOrigin: true
         }
       ],
