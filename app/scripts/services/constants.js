@@ -15,6 +15,7 @@ angular.module('shuwoAdminApp')
         uptoken: URL_PREFIX + '/uptoken',
         categoryAll: URL_PREFIX + '/allcategory',
         category: URL_PREFIX + '/category',
+        categoryimg: URL_PREFIX +'/categoryimg',
         shopAll: URL_PREFIX + '/allshops',
         shop: URL_PREFIX + '/shop',
         product: URL_PREFIX + '/product',
