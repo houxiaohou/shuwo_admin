@@ -9,6 +9,16 @@ angular.module('shuwoAdminApp')
       },
       deleteBD: function (id) {
         return $http.delete(constants.api.bd + '/' + id);
+      },
+      listBDShops: function(id) {
+        return $http.get(constants.api.bd + '/' + id + '/shops');
+      },
+      addBDShop: function(bdid, shopid) {
+        return $http.post(constants.api.bd + '/' + bdid + '/shop/' + shopid);
+      },
+      deleteBDShop: function(bdid, shopid) {
+        return $http.delete(constants.api.bd + '/' + bdid + '/shop/' + shopid);
       }
+
     };
   }]);
