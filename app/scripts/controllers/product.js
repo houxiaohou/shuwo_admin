@@ -84,6 +84,35 @@ angular.module('shuwoAdminApp')
         product.updateProductStatus(p);
       };
 
+      $scope.category = {};
+      $scope.categoryImg = [];
+      $scope.imgInfoClick = function() {
+        console.log($scope.product.category.value);
+        $scope.categorySelect = $scope.product.category;
+        var categoryid = $scope.categorySelect['value'];
+        category.getCategoryById(categoryid).success(function (data) {
+          $scope.category = data['category'];
+          $scope.categoryImg = data['categorypic'];
+        }).error(function () {
+          alert('获取数据出错');
+        });
+      };
+
+      $scope.selectChange = function() {
+        $scope.categoryid = $scope.product.category.value;
+        category.getCategoryById($scope.categoryid).success(function (data) {
+          $scope.category = data['category'];
+          $scope.categoryImg = data['categorypic'];
+        });
+      }
+
+      $scope.imgClick = function(img){
+        $scope.product.pimgurl = img.imgurl;
+        $scope.product.productname = img.des;
+      };
+
+
+
     }]);
 angular.module('shuwoAdminApp')
   .controller('ProductAddCtrl', ['$scope', '$state', '$stateParams', 'shop', 'product', 'category',

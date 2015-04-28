@@ -58,12 +58,12 @@
           <form role="form" name="addStoreForm">
             <tr>
               <td>
-                <div ng-controller="UploadCtrl" id="container" >
-                  <a class="btn btn-default "  id="upload-btn"><i class="fa fa-upload"></i></a>
+                <div id="container" >
+                  <a class="btn btn-default "  id="upload-btn"><i class="fa fa-info-circle" ng-click="imgInfoClick();" bs-popover data-template="productImg.html" data-placement="bottom" data-animation="am-flip-x"></i></a>
                 </div></td>
-              <td><img ng-src="{{product.pimgurl}}" alt="" width="60" ng-show="product.pimgurl"/></td>
+              <td><img ng-src="{{product.pimgurl}}" alt="" width="60" ng-show="product.pimgurl" /></td>
               <td><input type="text" placeholder="输入产品名称" class="form-control" ng-model="product.productname" required></td>
-              <td><select class="form-control" ng-model="product.category" ng-options="category as category.label for category in categories"></select></td>
+              <td><select class="form-control" ng-model="product.category" ng-options="category as category.label for category in categories" ng-change="selectChange()"></select></td>
               <td><input type="number" step="any" placeholder="原价(500g或个)" class="form-control" ng-model="product.price" required></td>
               <td><input type="number" step="any" placeholder="销售价(500g或个)" class="form-control" ng-model="product.discount" required></td>
               <td><select class="form-control" ng-model="product.attribute" ng-options="opt as opt.label for opt in options"></select></td>
@@ -97,7 +97,7 @@
               </label>
             </td>
             <td class="op">
-              <i class="fa fa-trash" ng-click="selectProduct(p);" bs-popover data-template="confirmRemove.html" data-placement="top" data-animation="am-flip-x"></i>
+             <a> <i class="fa fa-trash" ng-click="selectProduct(p);" bs-popover data-template="confirmRemove.html" data-placement="top" data-animation="am-flip-x"></i></a>
               <a ui-sref="shuwo.shop.product.edit({productId:p.productid})" bs-tooltip data-title="编辑产品"><i class="fa fa-edit"></i></a>
             </td>
           </tr>
@@ -113,10 +113,10 @@
 
 <script type="text/ng-template" id="confirmRemove.html">
   <div class="popover" tabindex="-1">
-    <div class="arrow"></div>
-    <h3 class="popover-title">确认删除？</h3>
-    <div class="popover-content text-center">
-      <form name="changeGroupNameForm">
+        <div class="arrow"></div>
+        <h3 class="popover-title">确认删除？</h3>
+        <div class="popover-content text-center">
+          <form name="changeGroupNameForm">
         <div class="text-center">
           <button type="button" class="btn btn-danger btn-sm" style="width: 45%;" ng-click="removeProduct(this)">删除
           </button>
@@ -124,6 +124,29 @@
           </button>
         </div>
       </form>
+    </div>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="productImg.html">
+  <div class="popover" tabindex="-1" ng-click="$hide()" >
+    <div class="arrow" ></div>
+    <h3 class="popover-title" style="float: right">图片列表</h3>
+    <div class="popover-content text-center" style="width: 600px">
+        <div class="panel panel-default" style="width:600px;">
+          <div class="panel-body" ng-show="categoryImg.length>0" style="width: 600px">
+            <form role="form">
+              <div class="form-group" style="width: 600px; ">
+                <div style="width:50px;"></div>
+                <div ng-show="categoryImg.length>0" ng-repeat="img in categoryImg" style="width: 80px;float:right;margin-right: 30px">
+                  <img ng-src="{{img['imgurl']}}" alt=""  width="80" height="80" ng-show="categoryImg.length>0" ng-click="imgClick(img)"/>
+                  <span type="text"    ng-show="categoryImg.length>0"  style="color:#000000;text-align:center;font-size:12px;display: inline-block"  >{{img['des']}}</span>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
     </div>
   </div>
 </script>
