@@ -29,8 +29,13 @@ angular.module('shuwoAdminApp')
         delivery: URL_PREFIX + '/deliveryorder',
         allUsers: URL_PREFIX + '/analytics/users',
         blockedUsers: URL_PREFIX + '/user/blocked',
+        searchUser: URL_PREFIX + '/user/search',
         userOrder: URL_PREFIX + '/analytics/user/orders',
-        userBlock: URL_PREFIX + '/user/block'
+        userBlock: URL_PREFIX + '/user/block',
+        allBags: URL_PREFIX + '/bags/all',
+        searchBag: URL_PREFIX + '/bags/search',
+        sendBags: URL_PREFIX + '/sendbags',
+        financeShop: URL_PREFIX + '/finance/shops'
       }
     }
   }]);

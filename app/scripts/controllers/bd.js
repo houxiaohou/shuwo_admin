@@ -64,11 +64,17 @@ angular.module('shuwoAdminApp')
           $state.go($state.current, {}, {reload: true});
         });
       };
-      $scope.deleteShop = function (shopid) {
+
+      $scope.selectShop = function (shopid) {
+        $scope.shopid = shopid;
+      };
+
+      $scope.deleteShop = function (e) {
         // 删除店铺
-        bd.deleteBDShop($scope.bdId, shopid).success(function () {
+        bd.deleteBDShop($scope.bdId, $scope.shopid).success(function () {
           $state.go($state.current, {}, {reload: true});
         });
+        e.$hide();
       };
 
     }]);

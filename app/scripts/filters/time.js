@@ -34,3 +34,10 @@ angular.module('shuwoAdminApp')
       return $filter('date')(date * 1000, 'MM-dd HH:mm');
     };
   });
+angular.module('shuwoAdminApp')
+  .filter('financeDate', function ($filter) {
+    return function (date) {
+      return $filter('date')(parseInt(date), 'yyyy-MM-dd');
+    };
+  });
+

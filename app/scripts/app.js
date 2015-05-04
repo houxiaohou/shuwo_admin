@@ -181,7 +181,26 @@ angular
           templateUrl: templateBase + 'views/user.orders.html',
           controller: 'UserOrdersCtrl'
         })
-
+        .state('shuwo.bag', {
+          abstract: true,
+          url: '/bag',
+          template: '<ui-view />'
+        })
+        .state('shuwo.bag.list', {
+          url: '',
+          templateUrl: templateBase + 'views/bag.list.html',
+          controller: 'BagListCtrl'
+        })
+        .state('shuwo.finance', {
+          abstract: true,
+          url: '/finance',
+          template: '<ui-view />'
+        })
+        .state('shuwo.finance.list', {
+          url: '',
+          templateUrl: templateBase + 'views/finance.list.html',
+          controller: 'FinanceListCtrl'
+        })
     }])
   .run(['$rootScope', '$state', '$stateParams', '$http', '$cookies',
     function ($rootScope, $state, $stateParams, $http, $cookies) {

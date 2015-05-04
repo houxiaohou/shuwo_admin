@@ -17,8 +17,7 @@
             <th>联系人</th>
             <th>电话</th>
             <th>营业中</th>
-            <th>是否优惠</th>
-            <th>优惠价格</th>
+            <th>红包可用</th>
             <th>操作</th>
           </tr>
           </thead>
@@ -39,9 +38,7 @@
                 <span></span>
               </label>
             </td>
-            <td>{{s.isdiscount}}
-            </td>
-            <td>{{s.discount}}</td>
+            <td>{{s.isbag}}</td>
             <td class="op">
               <i class="fa fa-trash" ng-click="selectShop(s.shopid);" bs-popover data-template="confirmRemove.html" data-animation="am-flip-x"></i>
               <a ui-sref="shuwo.shop.edit({id:s.shopid})" tooltip="编辑店铺"><i class="fa fa-edit"></i></a>

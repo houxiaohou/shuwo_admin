@@ -31,7 +31,11 @@ angular.module('shuwoAdminApp')
           data.isdiscount = 0;
           data.discount = 0;
         }
-
+        if (data.isbag) {
+          data.isbag = 1;
+        } else {
+          data.isbag = 0;
+        }
         return $http.post(constants.api.shop + '/' + data.shopid, data);
       },
       newShop: function (data) {

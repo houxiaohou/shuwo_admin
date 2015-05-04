@@ -29,6 +29,12 @@
         <li  ng-class="{active: $state.includes('shuwo.bd')}">
           <a ui-sref="shuwo.bd.list"><em class="fa fa-list"></em> <span class="item-text">BD管理</span></a>
         </li>
+        <li  ng-class="{active: $state.includes('shuwo.bag')}">
+          <a ui-sref="shuwo.bag.list"><em class="fa fa-ticket"></em> <span class="item-text">优惠券</span></a>
+        </li>
+        <li  ng-class="{active: $state.includes('shuwo.finance')}">
+          <a ui-sref="shuwo.finance.list"><em class="fa fa-dollar"></em> <span class="item-text">财务结算</span></a>
+        </li>
       </ul>
     </nav>
   </aside>

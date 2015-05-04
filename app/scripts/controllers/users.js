@@ -84,6 +84,15 @@ angular.module('shuwoAdminApp')
       }
     });
 
+    $scope.search = function () {
+      // 按手机号码搜索用户
+      $scope.loading = true;
+      user.searchUsersByPhone($scope.phone).success(function (data) {
+        $scope.users = data;
+        $scope.loading = false;
+      });
+    };
+
     $scope.blockUser = function (u) {
       // 禁止用户下单
       if (!confirm('确认加入黑名单吗？')) {

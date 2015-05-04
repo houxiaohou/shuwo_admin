@@ -21,6 +21,9 @@ angular.module('shuwoAdminApp')
       },
       listBlockedUsers: function(params) {
         return $http.get(constants.api.blockedUsers, {params: params});
+      },
+      searchUsersByPhone: function(phone) {
+        return $http.post(constants.api.searchUser, {phone: phone});
       }
     }
   }]);

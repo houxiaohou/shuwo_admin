@@ -61,7 +61,7 @@
             <td>{{s.contacts}}</td>
             <td>{{s.phone}}</td>
             <td>
-
+              <a href="javascript:;" ng-click="selectShop(s.shopid);" bs-popover data-template="confirmRemove.html" data-placement="top" data-animation="am-flip-x"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
           </tbody>
@@ -74,11 +74,11 @@
 <script type="text/ng-template" id="confirmRemove.html">
   <div class="popover" tabindex="-1">
     <div class="arrow"></div>
-    <h3 class="popover-title">确认删除？</h3>
+    <h3 class="popover-title">确认移除该店铺？</h3>
     <div class="popover-content text-center">
       <form name="changeGroupNameForm">
         <div class="text-center">
-          <button type="button" class="btn btn-danger btn-sm" style="width: 45%;" ng-click="removeProduct(this)">删除
+          <button type="button" class="btn btn-danger btn-sm" style="width: 45%;" ng-click="deleteShop(this)">删除
           </button>
           <button type="button" class="btn btn-default btn-sm" style="width: 45%;" ng-click="$event.preventDefault();$hide();">取消
           </button>
