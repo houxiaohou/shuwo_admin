@@ -53,6 +53,12 @@ angular.module('shuwoAdminApp')
       }
     });
 
+      $scope.$watch('page', function (newVal, oldVal) {
+        if (newVal != oldVal) {
+          loadPage();
+        }
+      });
+
     $scope.bagSearch = function () {
       if ($scope.phone != undefined) {
         bag.searchBags($scope.phone).success(function (data) {
@@ -68,11 +74,12 @@ angular.module('shuwoAdminApp')
       $scope.userId = userId;
     };
 
-    $scope.confirmBag = function (e) {
-      e.$hide();
-      bag.sendBags($scope.userId, $scope.amount).success(function () {
-        $state.reload();
-      });
+    $scope.sendBag = function(user_id, b) {
+        if (confirm("确定送红包吗？")) {
+            bag.sendBags(user_id, b).success(function() {
+                alert('红包发送成功！');
+            });
+        }
     };
 
   }]);
