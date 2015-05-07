@@ -19,7 +19,11 @@ angular.module('shuwoAdminApp')
       $scope.loading = true;
       finance.listShopFinanceByDate($scope.date).success(function (data) {
         $scope.loading = false;
-        $scope.datas = data;
+        $scope.datas = data.reverse();
+        for (var i in $scope.datas) {
+          var d = $scope.datas[i];
+          d.total = Number(d.discount) + 5 * Number(d.pickup_num);
+        }
       });
     }
 
