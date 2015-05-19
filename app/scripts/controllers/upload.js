@@ -34,11 +34,13 @@ angular.module('shuwoAdminApp')
 
         },
         'FileUploaded': function (up, file, info) {
+          console.log(file);
+          console.log(info);
           var domain = up.getOption('domain');
           var res = JSON.parse(info);
           var sourceLink = domain + res.key;
-          $scope.$parent.imageUploaded(sourceLink);
-          console.log(sourceLink);
+          var name = file.name.replace('.jpg', '').replace('.JPG', '').replace('.jpeg', '').replace('.JPEG', '').replace('.png', '').replace('.PNG', '');
+          $scope.$parent.imageUploaded(sourceLink, name);
         },
         'Error': function (up, err, errTip) {
         },

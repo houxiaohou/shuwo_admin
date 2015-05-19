@@ -10,18 +10,24 @@
 angular.module('shuwoAdminApp')
   .controller('BagListCtrl', ['$scope', '$state', 'bag', function ($scope, $state, bag) {
     $scope.options = [
-      {label: '全部', value: 0},
-      {label: '未使用', value: 1},
-      {label: '已使用', value: 2}
+      {label: '不限', value: -1},
+      {label: '0', value: 0},
+      {label: '1', value: 1},
+      {label: '2', value: 2},
+      {label: '3', value: 3},
+      {label: '4', value: 4},
+      {label: '≥5', value: 5}
     ];
 
-    $scope.filter = $scope.options[0];
+    $scope.bagUsed = $scope.options[0];
+    $scope.bagAvailable = $scope.options[0];
 
     $scope.bags = [];
 
     $scope.loading = true;
     $scope.page = 1;
     $scope.perPage = 10;
+    $scope.total = 0;
     $scope.totalItems = 1;
     $scope.condition = 0;
 
@@ -31,13 +37,15 @@ angular.module('shuwoAdminApp')
 
     function loadPage() {
       $scope.loading = true;
-      bag.listAllBags({
+      bag.countUserNum({
         start: ($scope.page - 1) * $scope.perPage,
         count: $scope.perPage,
-        condition: $scope.condition
+        used: $scope.bagUsed.value,
+        available: $scope.bagAvailable.value
       }).success(function (data) {
-        $scope.bags = data;
-        if (data.length === 10) {
+        $scope.total = data.count;
+        $scope.bags = data.users;
+        if (data.users.length === 10) {
           $scope.totalItems += 10;
         }
         $scope.loading = false;
@@ -53,11 +61,11 @@ angular.module('shuwoAdminApp')
       }
     });
 
-      $scope.$watch('page', function (newVal, oldVal) {
-        if (newVal != oldVal) {
-          loadPage();
-        }
-      });
+    $scope.$watch('page', function (newVal, oldVal) {
+      if (newVal != oldVal) {
+        loadPage();
+      }
+    });
 
     $scope.bagSearch = function () {
       if ($scope.phone != undefined) {
@@ -74,12 +82,40 @@ angular.module('shuwoAdminApp')
       $scope.userId = userId;
     };
 
-    $scope.sendBag = function(user_id, b) {
-        if (confirm("确定送红包吗？")) {
-            bag.sendBags(user_id, b).success(function() {
-                alert('红包发送成功！');
-            });
-        }
+    $scope.sendBag = function (user_id, b) {
+      if (confirm("确定送红包吗？")) {
+        bag.sendBags(user_id, b).success(function () {
+          alert('红包发送成功！');
+        });
+      }
     };
+
+    $scope.sendGroupBag = function (amount) {
+      if (confirm('确定群发红包吗')) {
+        var used = $scope.bagUsed.value;
+        var available = $scope.bagAvailable.value;
+        if (used == -1 || available != 0) {
+          alert('已使用不能选择不限，可用只能为0');
+          return;
+        }
+        bag.sendGroupBags(used, available, amount);
+        alert('已经发送请求，短时间内请不要重试！')
+      }
+    };
+
+    $scope.$watch('bagUsed', function (newVal, oldVal) {
+      if (newVal != oldVal) {
+        $scope.page = 1;
+        $scope.totalItems = 1;
+        loadPage();
+      }
+    });
+    $scope.$watch('bagAvailable', function (newVal, oldVal) {
+      if (newVal != oldVal) {
+        $scope.page = 1;
+        $scope.totalItems = 1;
+        loadPage();
+      }
+    });
 
   }]);

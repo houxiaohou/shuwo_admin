@@ -18,6 +18,7 @@
             <th>电话</th>
             <th>营业中</th>
             <th>红包可用</th>
+            <th>反刷单距离</th>
             <th>操作</th>
           </tr>
           </thead>
@@ -39,6 +40,7 @@
               </label>
             </td>
             <td>{{s.isbag}}</td>
+            <td>{{s.adistance}}</td>
             <td class="op">
               <i class="fa fa-trash" ng-click="selectShop(s.shopid);" bs-popover data-template="confirmRemove.html" data-animation="am-flip-x"></i>
               <a ui-sref="shuwo.shop.edit({id:s.shopid})" tooltip="编辑店铺"><i class="fa fa-edit"></i></a>

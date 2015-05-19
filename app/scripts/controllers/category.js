@@ -50,12 +50,16 @@ angular.module('shuwoAdminApp')
         });
       };
 
-      $scope.imageUploaded = function (link) {
+      $scope.imageUploaded = function (link, name) {
         $scope.categoryImgUrl.push(link);
         $scope.categoryImg[$scope.index]=[];
         $scope.categoryImg[$scope.index].push($scope.category.categoryname);
         $scope.categoryImg[$scope.index].push(link);
-        $scope.categoryImg[$scope.index].push($scope.categoryImgDesc);
+        if ($scope.categoryImgDesc && $scope.categoryImgDesc != '') {
+          $scope.categoryImg[$scope.index].push($scope.categoryImgDesc);
+        } else {
+          $scope.categoryImg[$scope.index].push(name);
+        }
         $scope.index ++ ;
         $scope.$apply();
       };
@@ -93,12 +97,16 @@ angular.module('shuwoAdminApp')
           category.deleteCategoryImg(img.id);
           $state.reload();
         }
-      }
+      };
 
-      $scope.imageUploaded = function (link) {
+      $scope.imageUploaded = function (link, name) {
         $scope.img = {};
         $scope.img.imgurl = link;
-        $scope.img.desc = $scope.categoryImgDesc;
+        if ($scope.categoryImgDesc && $scope.categoryImgDesc != '') {
+          $scope.img.desc = $scope.categoryImgDesc;
+        } else {
+          $scope.img.desc = name;
+        }
         if ($scope.categoryImg == null){
           $scope.categoryImg = [];
           $scope.categoryImg[0] = $scope.img;

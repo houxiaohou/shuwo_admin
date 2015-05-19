@@ -16,8 +16,14 @@ angular.module('shuwoAdminApp')
       searchBags: function (phone) {
         return $http.post(constants.api.searchBag, {phone: phone});
       },
-      sendBags: function(userIds, amount) {
+      sendBags: function (userIds, amount) {
         return $http.post(constants.api.sendBags, {userids: userIds, amount: amount});
+      },
+      sendGroupBags: function(used, available, amount) {
+        return $http.post(constants.api.sendGroupBags, {used: used, available: available, amount: amount});
+      },
+      countUserNum: function (params) {
+        return $http.get(constants.api.filterBagUserCount, {params: params});
       }
     }
   }]);
