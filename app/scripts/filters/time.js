@@ -11,33 +11,68 @@
 angular.module('shuwoAdminApp')
   .filter('humanTime', function ($filter) {
     return function (date) {
+      if (date == null) {
+        return '';
+      }
       var time = new Date(date);
       date = time.getTime() / 1000;
-      var now = new Date();
-      if (time.getFullYear() != now.getFullYear() || time.getMonth() != now.getMonth()) {
-        return $filter('date')(time, 'yyyy-MM-dd HH:mm');
-      }
-      if (now.getDate() - time.getDate() == 1) {
-        return '昨天 ' + $filter('date')(time, 'HH:mm');
-      }
-      var ts = Date.now();
-      var offset = Math.ceil(ts / 1000) - date;
-      if (offset < 60) {
-        return '刚刚';
-      }
-      if (offset / 60 < 60) {
-        return Math.ceil(offset / 60) + '分钟前';
-      }
-      if (offset / 60 > 60 && offset / 60 / 60 < 24) {
-        return Math.ceil(offset / 60 / 60) + '小时前';
-      }
       return $filter('date')(date * 1000, 'MM-dd HH:mm');
     };
   });
 angular.module('shuwoAdminApp')
+  .filter('timeOffset1', function () {
+    return function (order) {
+      if (order.confirm_time == null) {
+        return '';
+      }
+      var time1 = new Date(order.createdtime);
+      var time2 = new Date(order.confirm_time);
+      var secNum = (time2.getTime() - time1.getTime()) / 1000;
+      var hours = Math.floor(secNum / 3600);
+      var minutes = Math.floor((secNum - (hours * 3600)) / 60);
+      var second = secNum - (hours * 3600) - (minutes * 60);
+
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (second < 10) {
+        second = "0" + second;
+      }
+      return hours + ':' + minutes + ':' + second;
+    }
+  });
+angular.module('shuwoAdminApp')
+  .filter('timeOffset2', function () {
+    return function (order) {
+      if (order.user_confirm_time == null) {
+        return '';
+      }
+      var time1 = new Date(order.confirm_time);
+      var time2 = new Date(order.user_confirm_time);
+      var secNum = (time2.getTime() - time1.getTime()) / 1000;
+      var hours = Math.floor(secNum / 3600);
+      var minutes = Math.floor((secNum - (hours * 3600)) / 60);
+      var second = secNum - (hours * 3600) - (minutes * 60);
+
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      if (second < 10) {
+        second = "0" + second;
+      }
+      return hours + ':' + minutes + ':' + second;
+    }
+  });
+angular.module('shuwoAdminApp')
   .filter('financeDate', function ($filter) {
     return function (date) {
-      return $filter('date')(parseInt(date), 'yyyy-MM-dd');
+      return $filter('date')(parseInt(date), 'MM-dd');
     };
   });
 

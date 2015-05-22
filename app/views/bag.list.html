@@ -1,56 +1,88 @@
 <h3>优惠券</h3>
 
 <div class="row">
-  <div class="col-lg-3">
-    <div class="input-group">
-      <input type="text" class="form-control" placeholder="输入电话查询用户红包" ng-model="phone">
-      <div class="input-group-btn">
-        <button class="btn btn-default" type="submit" ng-click="bagSearch()"><i class="fa fa-search"></i></button>
-      </div>
+
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">条件筛选</div>
+            <div class="panel-body">
+                <div class="col-lg-4">
+                    <div class="form form-inline">
+                        <div class="form-group" style="margin: 0 20px;">
+                            <label>已用红包</label>
+                            <select class="form-control" ng-model="bagUsed" ng-options="opt as opt.label for opt in options"></select>
+                        </div>
+                        <div class="form-group" style="margin: 0 20px;">
+                            <label>可用红包</label>
+                            <select class="form-control" ng-model="bagAvailable" ng-options="opt as opt.label for opt in options"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <p style="margin: 10px 0 0 0" class="text-center">符合筛选条件的共{{total}}个</p>
+                </div>
+                <div class="col-lg-5">
+                    <a href="javascript:;" ng-click="sendGroupBag(5);" class="btn btn-success btn-sm">群发5元红包</a>
+                    <a href="javascript:;" ng-click="sendGroupBag(10)" class="btn btn-danger btn-sm">群发10元红包</a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="col-lg-3">
-    <select name="status" class="form-control" ng-model="filter" ng-options="opt as opt.label for opt in options"></select>
-  </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="输入电话查询用户红包" ng-model="phone">
+
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit" ng-click="bagSearch()"><i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row" style="margin-top: 10px">
-  <div class="col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">优惠券列表</div>
-      <div class="panel-body">
-        <p ng-show="loading" class="text-center"><i class="fa fa-spinner fa-spin fa-2x"></i></p>
-        <table class="table table-striped table-hover" role="grid" ng-show="!loading">
-          <thead>
-          <tr role="row">
-            <th>id</th>
-            <th>用户昵称</th>
-            <th>头像</th>
-            <th>总优惠券数</th>
-            <th>已用</th>
-            <th>可用</th>
-            <td>操作</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr ng-repeat="b in bags">
-            <td>{{b.userid}}</td>
-            <td>{{b.nickname}}</td>
-            <td><img ng-src="{{b.headimgurl}}" alt="" width="40"/></td>
-            <td>{{b.bag_num}}</td>
-            <td>{{b.used_num}}</td>
-            <td>{{b.available_num}}</td>
-            <td>
-              <a href="javascript:;" ng-click="sendBag(b.userid, 5);" class="btn btn-success btn-sm">送5元红包</a>
-              <a href="javascript:;" ng-click="sendBag(b.userid, 10)" class="btn btn-danger btn-sm">送10元红包</a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="panel-footer">
-        <pager ng-model="page" total-items="totalItems" items-per-page="10"></pager>
-      </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">用户列表（{{total}}）</div>
+            <div class="panel-body">
+                <p ng-show="loading" class="text-center"><i class="fa fa-spinner fa-spin fa-2x"></i></p>
+                <table class="table table-striped table-hover" role="grid" ng-show="!loading">
+                    <thead>
+                    <tr role="row">
+                        <th>id</th>
+                        <th>用户昵称</th>
+                        <th>头像</th>
+                        <th>总优惠券数</th>
+                        <th>已用</th>
+                        <th>可用</th>
+                        <td>操作</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="b in bags">
+                        <td>{{b.userid}}</td>
+                        <td>{{b.nickname}}</td>
+                        <td><img ng-src="{{b.headimgurl}}" alt="" width="40"/></td>
+                        <td>{{b.bag_num}}</td>
+                        <td>{{b.used_num}}</td>
+                        <td>{{b.available_num}}</td>
+                        <td>
+                            <a href="javascript:;" ng-click="sendBag(b.userid, 5);"
+                               class="btn btn-success btn-sm">送5元红包</a>
+                            <a href="javascript:;" ng-click="sendBag(b.userid, 10)"
+                               class="btn btn-danger btn-sm">送10元红包</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <pager ng-model="page" total-items="totalItems" items-per-page="10"></pager>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

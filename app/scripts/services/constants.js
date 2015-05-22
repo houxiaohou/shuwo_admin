@@ -15,7 +15,7 @@ angular.module('shuwoAdminApp')
         uptoken: URL_PREFIX + '/uptoken',
         categoryAll: URL_PREFIX + '/allcategory',
         category: URL_PREFIX + '/category',
-        categoryimg: URL_PREFIX +'/categoryimg',
+        categoryimg: URL_PREFIX + '/categoryimg',
         shopAll: URL_PREFIX + '/allshops',
         shop: URL_PREFIX + '/shop',
         product: URL_PREFIX + '/product',
@@ -35,6 +35,8 @@ angular.module('shuwoAdminApp')
         allBags: URL_PREFIX + '/bags/all',
         searchBag: URL_PREFIX + '/bags/search',
         sendBags: URL_PREFIX + '/sendbags',
+        sendGroupBags: URL_PREFIX + '/sendGroupBags',
+        filterBagUserCount: URL_PREFIX + '/bag/bagUserCount',
         financeShop: URL_PREFIX + '/finance/shops'
       }
     }

@@ -25,15 +25,19 @@
           <thead>
           <tr role="row">
             <th>订单时间</th>
-            <th>订单编号</th>
-            <th>店铺名称</th>
-            <th>收货人</th>
+            <th>店铺确认</th>
+            <th>用户确认</th>
+            <th>距离</th>
+            <th>编号</th>
+            <th>店铺</th>
+            <th>姓名</th>
             <th>电话</th>
             <th>地址</th>
             <th>配送</th>
             <th>时间</th>
+            <th>优惠</th>
             <th>价格</th>
-            <th>订单状态</th>
+            <th>状态</th>
             <th>操作</th>
           </tr>
           </thead>
@@ -43,7 +47,10 @@
           </tr>
           <tr role="row" ng-class-odd="'odd'" ng-class-even="'even'" ng-repeat="o in orders" ng-show="!loading"
               ng-class="{'success': o.isdelivery=='1'}">
-            <td>{{o.createdtime}}（{{o.createdtime | humanTime}}）</td>
+            <td>{{o.createdtime | humanTime}}</td>
+            <td>{{o | timeOffset1}}</td>
+            <td>{{o | timeOffset2}}</td>
+            <td>{{o.distance | orderDistance}}</td>
             <td>{{o.orderid}}</td>
             <td>{{allShops[o.shopid]}}</td>
             <td>{{o.username}}</td>
@@ -54,6 +61,7 @@
               <span class="label label-info" ng-show="o.ispickup=='1'">自提</span>
             </td>
             <td>{{o.dltime}}</td>
+            <td>￥{{o.discount}}</td>
             <td>￥{{o.price}}</td>
             <td>
               <div class="label label-danger" ng-if="o.orderstatus=='0'">待确认</div>
