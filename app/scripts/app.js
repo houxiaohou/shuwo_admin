@@ -201,6 +201,16 @@ angular
           templateUrl: templateBase + 'views/finance.list.html',
           controller: 'FinanceListCtrl'
         })
+        .state('shuwo.tongji', {
+          abstract: true,
+          url: '/tongji',
+          template: '<ui-view />'
+        })
+        .state('shuwo.tongji.main', {
+          url: '',
+          templateUrl: templateBase + 'views/tongji.main.html',
+          controller: 'TongjiMainCtrl'
+        })
     }])
   .run(['$rootScope', '$state', '$stateParams', '$http', '$cookies',
     function ($rootScope, $state, $stateParams, $http, $cookies) {
