@@ -37,7 +37,8 @@ angular.module('shuwoAdminApp')
         sendBags: URL_PREFIX + '/sendbags',
         sendGroupBags: URL_PREFIX + '/sendGroupBags',
         filterBagUserCount: URL_PREFIX + '/bag/bagUserCount',
-        financeShop: URL_PREFIX + '/finance/shops'
+        financeShop: URL_PREFIX + '/finance/shops',
+        financejiuting: URL_PREFIX + '/finance/jiuting'
       }
     }
   }]);

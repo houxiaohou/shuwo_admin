@@ -10,7 +10,7 @@
 angular.module('shuwoAdminApp')
   .service('finance', ['$http', 'constants', function ($http, constants) {
     return {
-      listShopFinanceByDate: function (date) {
+        listShopFinanceByDate: function (date) {
         return $http.get(constants.api.financeShop, {params: {date: date}});
       }
     }

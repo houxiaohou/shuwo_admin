@@ -10,8 +10,8 @@
 angular.module('shuwoAdminApp')
   .service('tongji', ['$http', 'constants', function ($http, constants) {
     return {
-      listShujuTongjiByDate: function (date) {
-        return $http.get(constants.api.shujutongji, {params: {date: date}});
+      listShujuTongjiByDate: function () {
+        return $http.get(constants.api.financejiuting);
       }
     }
   }]);
