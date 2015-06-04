@@ -8,9 +8,8 @@
  * Controller of the shuwoAdminApp
  */
 angular.module('shuwoAdminApp')
-  .controller('TongjiMainCtrl', ['$scope', 'tongji', function ($scope, tongji) {
+  .controller('TongjiMainCtrl', ['$scope','$state', 'tongji', function ($scope, $state,tongji) {
 
-    $scope.date = new Date().getTime() - 24 * 3600 * 1000;
     $scope.datas = [];
 
     jiutinguserFinance();
