@@ -102,6 +102,7 @@ angular.module('shuwoAdminApp')
         $scope.shop.isdiscount = $scope.shop.isdiscount === '1';
         $scope.shop.isbag = $scope.shop.isbag === '1';
         $scope.shop.discount = Number($scope.shop.discount);
+        $scope.shop.weight = Number($scope.shop.weight);
         $scope.shop.adistance = Number($scope.shop.adistance);
         initialMap();
       });
